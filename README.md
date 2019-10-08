@@ -5,9 +5,9 @@
 ### Author: Luke Donahue
 
 ### Links and Resources
-* [submission PR]()
-* [travis]()
-* [back-end]()
+* [submission PR](https://github.com/Luke9389-career-track/tour-manager/pull/1)
+* [travis](https://www.travis-ci.com/Luke9389-career-track/tour-manager/jobs/243611610)
+* [back-end](https://dashboard.heroku.com/apps/peaceful-depths-36031)
 
 ### Setup
 #### `.env` requirements
@@ -21,7 +21,6 @@
    * "pretest": "npm run lint",
    * "jest": "jest --runInBand --verbose",
    * "test": "npm run jest",
-   * "test:coverage": "npm run test -- --coverage",
    * "test:watch": "npm run jest -- --watchAll",
    * "test:verbose": "npm run test -- --verbose",
    * "start": "node server.js",
