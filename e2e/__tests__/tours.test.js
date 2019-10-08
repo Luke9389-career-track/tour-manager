@@ -1,13 +1,30 @@
 jest.mock('../../lib/services/maps-api.js');
+jest.mock('../../lib/services/weather-api.js');
 const request = require('../request');
 const db = require('../db');
 // const { matchMongoId } = require('../match-helpers');
 const getLocation = require('../../lib/services/maps-api');
+const getForecast = require('../../lib/services/weather-api');
 
 getLocation.mockResolvedValue({
   latitude: 45.5266975,
   longitude: -122.6880503
 });
+
+getForecast.mockResolvedValue([
+  {
+    time: '2019-10-02T07:00:00.000Z',
+    forecast: 'Possible drizzle overnight.',
+    high: 63.29,
+    low: 47.07
+  },
+  {
+    time: '2019-10-03T07:00:00.000Z',
+    forecast: 'Cloudy with snow at high elevations.',
+    high: 50.89,
+    low: 38.13
+  }
+]);
 
 describe('tours api', () => {
   beforeEach(() => {
@@ -68,7 +85,17 @@ describe('tours api', () => {
           });
       })
       .then((stop) => {
-        console.log(stop.body);
+        expect(stop.body[0]).toEqual({
+          _id: expect.any(String),
+          location: {
+            latitude: expect.any(Number),
+            longitude: expect.any(Number)
+          },
+          weather: {
+            time: expect.any(String),
+            forecast: expect.any(String)
+          }  
+        });
       });
   });
 
